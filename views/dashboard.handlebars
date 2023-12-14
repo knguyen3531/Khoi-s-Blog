@@ -1,0 +1,13 @@
+{{#if userPosts.length}}
+  {{#each userPosts}}
+    <div class="post">
+      <h2>{{title}}</h2>
+      <p>{{content}}</p>
+      <p>Posted on {{createdAt}}</p>
+      <a href="/edit/{{id}}">Edit</a>
+      <a href="/delete/{{id}}">Delete</a>
+    </div>
+  {{/each}}
+{{else}}
+  <p>No posts yet. <a href="/new">Create one!</a></p>
+{{/if}}

@@ -1,0 +1,16 @@
+-- Create the User table
+CREATE TABLE User (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  username VARCHAR(255) NOT NULL UNIQUE,
+  password VARCHAR(255) NOT NULL
+);
+
+-- Create the Post table
+CREATE TABLE Post (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  title VARCHAR(255) NOT NULL,
+  content TEXT NOT NULL,
+  createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  userId INT,
+  FOREIGN KEY (userId) REFERENCES User(id) ON DELETE CASCADE
+);

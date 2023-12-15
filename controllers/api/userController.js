@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const passport = require('../config/passport'); // Passport.js configuration
+const passport = require('../../config/passport');
 
 // Define routes and actions for user authentication
 router.post('/signup', passport.authenticate('local-signup'), (req, res) => {

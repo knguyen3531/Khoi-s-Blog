@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 // Import the Post model
-const { Post } = require('../models');
+const Post = require('../../models/Post');
 
 // Route to get all posts
 router.get('/posts', async (req, res) => {

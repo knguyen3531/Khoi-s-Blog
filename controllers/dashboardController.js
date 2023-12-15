@@ -1,22 +1,29 @@
 const express = require('express');
 const router = express.Router();
+const Post = require('../models/Post'); // Import the Post model
+const User = require('../models/User'); // Import the User model
 
-// Import the Post model
-const { Post } = require('../models');
-
-// Define routes and actions
+// GET route for the dashboard
 router.get('/dashboard', async (req, res) => {
-  try {
-    // Fetch blog posts created by the logged-in user from the database
-    const userId = req.user.id; // Assuming you have implemented user authentication
-    const userPosts = await Post.findAll({ where: { userId }, order: [['createdAt', 'DESC']] });
+    try {
+        // Assuming you have some form of authentication and user identification
+        const userId = req.user.id;
+        
+        // Fetch posts created by the logged-in user
+        const userPosts = await Post.findAll({
+            where: {
+                userId: userId
+            }
+        });
 
-    // Render the dashboard view with the user's posts
-    res.render('dashboard', { userPosts });
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: 'Server error' });
-  }
+        // Render the dashboard view, passing the posts data
+        res.render('dashboard', {
+            posts: userPosts
+        });
+    } catch (error) {
+        console.error('Error fetching user posts:', error);
+        res.status(500).send('Server Error');
+    }
 });
 
 module.exports = router;
